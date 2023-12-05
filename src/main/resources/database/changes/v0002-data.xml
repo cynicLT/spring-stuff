@@ -1,0 +1,631 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!--    Data -->
+    <changeSet author="system" id="4">
+        <insert tableName="ORGANIZATION">
+            <column name="ID" valueSequenceNext="ORGANIZATION_SEQ"/>
+            <column name="COMMENT" value="Organization is primary customer"/>
+            <column name="ADDRESS" value="Verkiu g. 5, Vilnius"/>
+            <column name="EMAIL" value="info@girteka.lt"/>
+            <column name="NAME" value="UAB Girteka"/>
+            <column name="PHONE" value="+370 612 34 567"/>
+        </insert>
+        <insert tableName="ORGANIZATION">
+            <column name="ID" valueSequenceNext="ORGANIZATION_SEQ"/>
+            <column name="ADDRESS" value="Bebru g. 12, Kaunas"/>
+            <column name="EMAIL" value="info@spedlita.lt"/>
+            <column name="NAME" value="UAB Spedlita"/>
+            <column name="PHONE" value="+370 676 54 321"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="5">
+        <insert tableName="MANAGER">
+            <column name="ID" valueSequenceNext="MANAGER_SEQ"/>
+            <column name="COMMENT" value="Smart manager"/>
+            <column name="EMAIL" value="smart@girteka.lt"/>
+            <column name="NAME" value="Jonas Jonaitis"/>
+            <column name="PHONE" value="+370 674 58 789"/>
+            <column name="ORGANIZATION_ID" value="1"/>
+        </insert>
+        <insert tableName="MANAGER">
+            <column name="ID" valueSequenceNext="MANAGER_SEQ"/>
+            <column name="EMAIL" value="simple@girteka.lt"/>
+            <column name="NAME" value="Petras Pertaitis"/>
+            <column name="PHONE" value="+370 674 58 789"/>
+            <column name="ORGANIZATION_ID" value="1"/>
+        </insert>
+        <insert tableName="MANAGER">
+            <column name="ID" valueSequenceNext="MANAGER_SEQ"/>
+            <column name="EMAIL" value="kiril@zenitech.co.uk"/>
+            <column name="NAME" value="Gzegos Ivanauskas"/>
+            <column name="PHONE" value="+370 678 88 911"/>
+            <column name="ORGANIZATION_ID" value="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="6">
+        <insert tableName="RATE">
+            <column name="ID" valueSequenceNext="RATE_SEQ"/>
+            <column name="DATE_TIME" value="1999-01-01 01:00"/>
+            <column name="CURRENCY" value="EUR"/>
+            <column name="VALUE" value="1"/>
+            <column name="SOURCE" value="ECB"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="7">
+        <insert tableName="DOCUMENT">
+            <!--            NOTE: known bug https://github.com/liquibase/liquibase/issues/3645-->
+            <column name="ID" valueComputed="nextval('DOCUMENT_SEQ')"/>
+            <column name="FILE_NAME" value="profile.pdf"/>
+            <column name="CONTENT" valueBlobFile="files/profile.pdf"/>
+        </insert>
+        <insert tableName="DOCUMENT">
+            <column name="ID" valueComputed="nextval('DOCUMENT_SEQ')"/>
+            <column name="FILE_NAME" value="document.txt"/>
+            <column name="CONTENT" valueBlobFile="files/document.txt"/>
+        </insert>
+        <insert tableName="DOCUMENT">
+            <column name="ID" valueComputed="nextval('DOCUMENT_SEQ')"/>
+            <column name="FILE_NAME" value="katalogas.pdf"/>
+            <column name="CONTENT" valueBlobFile="files/katalogas.pdf"/>
+        </insert>
+        <insert tableName="DOCUMENT">
+            <column name="ID" valueComputed="nextval('DOCUMENT_SEQ')"/>
+            <column name="FILE_NAME" value="pienas.pdf"/>
+            <column name="CONTENT" valueBlobFile="files/pienas.pdf"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="8">
+        <insert tableName="ORDER">
+            <column name="ID" valueSequenceNext="ORDER_SEQ"/>
+            <column name="DATE_TIME" value="2024-05-09 10:50:11"/>
+            <column name="NAME" value="Deliver bananas"/>
+            <column name="DESCRIPTION"
+                    value="Passenger secure ways supporting consulting null shipped, moment magazine britannica beads movie key welcome, situations firms emotions overall editorials."/>
+            <column name="MANAGER_ID" value="3"/>
+            <column name="OWNER_ID" value="1"/>
+            <column name="CLOSED" value="N"/>
+        </insert>
+        <insert tableName="ORDER">
+            <column name="ID" valueSequenceNext="ORDER_SEQ"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="NAME" value="To EUROVAISTINE"/>
+            <column name="MANAGER_ID" value="3"/>
+            <column name="OWNER_ID" value="1"/>
+            <column name="CLOSED" value="N"/>
+        </insert>
+
+        <insert tableName="ORDER">
+            <column name="ID" valueSequenceNext="ORDER_SEQ"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="NAME" value="Truck details"/>
+            <column name="MANAGER_ID" value="3"/>
+            <column name="OWNER_ID" value="1"/>
+            <column name="CLOSED" value="Y"/>
+        </insert>
+        <insert tableName="ORDER">
+            <column name="ID" valueSequenceNext="ORDER_SEQ"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="NAME" value="Warehouse leftovers"/>
+            <column name="MANAGER_ID" value="3"/>
+            <column name="OWNER_ID" value="1"/>
+            <column name="CLOSED" value="Y"/>
+        </insert>
+
+        <insert tableName="ORDER">
+            <column name="ID" valueSequenceNext="ORDER_SEQ"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="NAME" value="Order 1"/>
+            <column name="MANAGER_ID" value="3"/>
+            <column name="OWNER_ID" value="1"/>
+            <column name="CLOSED" value="N"/>
+        </insert>
+        <insert tableName="ORDER">
+            <column name="ID" valueSequenceNext="ORDER_SEQ"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="NAME" value="Order 2"/>
+            <column name="MANAGER_ID" value="3"/>
+            <column name="OWNER_ID" value="1"/>
+            <column name="CLOSED" value="N"/>
+        </insert>
+
+        <insert tableName="ORDER">
+            <column name="ID" valueSequenceNext="ORDER_SEQ"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="NAME"
+                    value="Notifications poems renaissance application suffer tribal alexandria, importance arranged proven combination vertical prospects butler, commissioners stickers gray rides bless teddy advanced, tooth democracy field polished wireless marked exhaust, guilty."/>
+            <column name="MANAGER_ID" value="3"/>
+            <column name="OWNER_ID" value="1"/>
+            <column name="CLOSED" value="Y"/>
+        </insert>
+        <insert tableName="ORDER">
+            <column name="ID" valueSequenceNext="ORDER_SEQ"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="NAME" value="Decrease speak sporting response."/>
+            <column name="DESCRIPTION" value="Singing St 2265, Verkalix, Rwanda, 719495"/>
+            <column name="MANAGER_ID" value="3"/>
+            <column name="OWNER_ID" value="1"/>
+            <column name="CLOSED" value="N"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="9">
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Chiquite Bananase"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Columbia Bananas"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Dried Banana from Congo"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Insulin (Nonorapid)"/>
+            <column name="DESCRIPTION" value="Fridge required"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Tramadol"/>
+            <column name="DESCRIPTION" value="Drug protection"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Car spare parts"/>
+            <column name="DESCRIPTION" value="For Krasta Auto"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Coconut"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Consolidated from leftovers"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Chairs for Southbey"/>
+            <column name="DESCRIPTION" value="Expensive required guardians"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Vilkiskiu Varske"/>
+            <column name="DESCRIPTION"
+                    value="по началу мне нравился этот сериал... но когда девушка пришла рожать ребенка на берег кислотного моря, я понял что она пришла туду, чтобы выкинуть новорожденного в кислоту, ... и я понял что сериал ховно... а когда она стала делать вид что ей грустно что новорожденного забрало другое существо... я понял что сериал ещё хуже... и когда она почти позвола убить приёмную маму, вскармливающего ребенка... я пронял что больше не буду смотреть этот сериал"/>
+        </insert>
+        <insert tableName="ITEM">
+            <column name="ID" valueSequenceNext="ITEM_SEQ"/>
+            <column name="NAME" value="Дерево (сырое необработаное)"/>
+            <column name="DESCRIPTION" value="Возможно контрабанда"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="10">
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="N"/>
+            <column name="TYPE" value="INCOME"/>
+            <column name="VALUE" value="1.99"/>
+            <column name="CURRENCY" value="USD"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-11-16 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="N"/>
+            <column name="TYPE" value="INCOME"/>
+            <column name="VALUE" value="3.99"/>
+            <column name="CURRENCY" value="USD"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-11-10 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="N"/>
+            <column name="TYPE" value="SPENT"/>
+            <column name="VALUE" value="14.79"/>
+            <column name="CURRENCY" value="GBP"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-11-11 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="N"/>
+            <column name="TYPE" value="INCOME"/>
+            <column name="VALUE" value="0.09"/>
+            <column name="CURRENCY" value="USD"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-11-09 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="N"/>
+            <column name="TYPE" value="INCOME"/>
+            <column name="VALUE" value="1.09"/>
+            <column name="CURRENCY" value="EUR"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-11-08 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="Y"/>
+            <column name="TYPE" value="SPENT"/>
+            <column name="VALUE" value="0.91"/>
+            <column name="CURRENCY" value="USD"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-10-04 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="Y"/>
+            <column name="TYPE" value="INCOME"/>
+            <column name="VALUE" value="1457.77"/>
+            <column name="CURRENCY" value="GBP"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-11-21 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="N"/>
+            <column name="TYPE" value="SPENT"/>
+            <column name="VALUE" value="540.78"/>
+            <column name="CURRENCY" value="EUR"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2024-02-09 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="Y"/>
+            <column name="TYPE" value="SPENT"/>
+            <column name="VALUE" value="14.14"/>
+            <column name="CURRENCY" value="EUR"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-12-01 10:50:11"/>
+        </insert>
+        <insert tableName="PRICE">
+            <column name="ID" valueSequenceNext="PRICE_SEQ"/>
+            <column name="COVERED" value="N"/>
+            <column name="TYPE" value="SPENT"/>
+            <column name="VALUE" value="15.15"/>
+            <column name="CURRENCY" value="EUR"/>
+            <column name="DATE_TIME" value="2023-11-09 10:50:11"/>
+            <column name="DUE_DATE_TIME" value="2023-11-16 10:50:11"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="11">
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ORDER_ID" value="1"/>
+            <column name="PRICE_ID" value="1"/>
+            <column name="FRACTION" value="1"/>
+            <column name="COMMENT" value="Comment 1"/>
+        </insert>
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ORDER_ID" value="2"/>
+            <column name="PRICE_ID" value="1"/>
+            <column name="FRACTION" value="0.7"/>
+            <column name="COMMENT" value="Comment XX"/>
+        </insert>
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ORDER_ID" value="3"/>
+            <column name="PRICE_ID" value="1"/>
+            <column name="FRACTION" value="0.7"/>
+            <column name="COMMENT" value="Comment 2"/>
+        </insert>
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ORDER_ID" value="2"/>
+            <column name="PRICE_ID" value="7"/>
+            <column name="FRACTION" value="0.3"/>
+            <column name="COMMENT" value="Comment 3"/>
+        </insert>
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ORDER_ID" value="2"/>
+            <column name="PRICE_ID" value="8"/>
+            <column name="FRACTION" value="0.5"/>
+            <column name="COMMENT" value="Comment 4"/>
+        </insert>
+
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ITEM_ID" value="1"/>
+            <column name="PRICE_ID" value="2"/>
+            <column name="FRACTION" value="1"/>
+            <column name="COMMENT" value="Comment 1"/>
+        </insert>
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ITEM_ID" value="2"/>
+            <column name="PRICE_ID" value="2"/>
+            <column name="FRACTION" value="0.96"/>
+            <column name="COMMENT" value="Comment YY"/>
+        </insert>
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ITEM_ID" value="1"/>
+            <column name="PRICE_ID" value="4"/>
+            <column name="FRACTION" value="0.7"/>
+            <column name="COMMENT" value="Comment 2"/>
+        </insert>
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ITEM_ID" value="2"/>
+            <column name="PRICE_ID" value="5"/>
+            <column name="FRACTION" value="0.6"/>
+            <column name="COMMENT" value="Comment 3"/>
+        </insert>
+
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ITEM_ID" value="3"/>
+            <column name="PRICE_ID" value="6"/>
+            <column name="FRACTION" value="1.2"/>
+            <column name="COMMENT" value="Comment 4"/>
+        </insert>
+
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ITEM_ID" value="4"/>
+            <column name="PRICE_ID" value="9"/>
+            <column name="FRACTION" value="0.98"/>
+            <column name="COMMENT" value="Comment 5"/>
+        </insert>
+
+        <insert tableName="ITEM_ORDER_PRICE">
+            <column name="ID" valueSequenceNext="ITEM_ORDER_PRICE_SEQ"/>
+            <column name="ITEM_ID" value="5"/>
+            <column name="PRICE_ID" value="10"/>
+            <column name="FRACTION" value="1"/>
+            <column name="COMMENT" value="Comment 6"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="12">
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="1"/>
+            <column name="ITEM_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="1"/>
+            <column name="ITEM_ID" value="2"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="1"/>
+            <column name="ITEM_ID" value="3"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="2"/>
+            <column name="ITEM_ID" value="4"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="2"/>
+            <column name="ITEM_ID" value="5"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="3"/>
+            <column name="ITEM_ID" value="6"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="4"/>
+            <column name="ITEM_ID" value="7"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="4"/>
+            <column name="ITEM_ID" value="8"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="4"/>
+            <column name="ITEM_ID" value="9"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="4"/>
+            <column name="ITEM_ID" value="10"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="1"/>
+            <column name="ITEM_ID" value="10"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="2"/>
+            <column name="ITEM_ID" value="10"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="3"/>
+            <column name="ITEM_ID" value="10"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="4"/>
+            <column name="ITEM_ID" value="11"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="5"/>
+            <column name="ITEM_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="5"/>
+            <column name="ITEM_ID" value="2"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="5"/>
+            <column name="ITEM_ID" value="3"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="5"/>
+            <column name="ITEM_ID" value="4"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="5"/>
+            <column name="ITEM_ID" value="5"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="6"/>
+            <column name="ITEM_ID" value="11"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="6"/>
+            <column name="ITEM_ID" value="10"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="7"/>
+            <column name="ITEM_ID" value="9"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="8"/>
+            <column name="ITEM_ID" value="8"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="8"/>
+            <column name="ITEM_ID" value="7"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="8"/>
+            <column name="ITEM_ID" value="5"/>
+        </insert>
+        <insert tableName="ORDER_ITEM">
+            <column name="ORDER_ID" value="8"/>
+            <column name="ITEM_ID" value="2"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="13">
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="1"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="1"/>
+            <column name="DOCUMENT_ID" value="2"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="1"/>
+            <column name="DOCUMENT_ID" value="3"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="1"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="2"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="3"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="4"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="5"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="6"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="PRICE_DOCUMENT">
+            <column name="PRICE_ID" value="7"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="14">
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="1"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="1"/>
+            <column name="DOCUMENT_ID" value="2"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="2"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="3"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="4"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="5"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="6"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="7"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="8"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="2"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="3"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="4"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="5"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="6"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="7"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+        <insert tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" value="8"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+    </changeSet>
+
+    <changeSet author="system" id="15">
+        <insert tableName="ITEM_DOCUMENT">
+            <column name="ITEM_ID" value="10"/>
+            <column name="DOCUMENT_ID" value="1"/>
+        </insert>
+        <insert tableName="ITEM_DOCUMENT">
+            <column name="ITEM_ID" value="10"/>
+            <column name="DOCUMENT_ID" value="2"/>
+        </insert>
+        <insert tableName="ITEM_DOCUMENT">
+            <column name="ITEM_ID" value="10"/>
+            <column name="DOCUMENT_ID" value="3"/>
+        </insert>
+        <insert tableName="ITEM_DOCUMENT">
+            <column name="ITEM_ID" value="10"/>
+            <column name="DOCUMENT_ID" value="4"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

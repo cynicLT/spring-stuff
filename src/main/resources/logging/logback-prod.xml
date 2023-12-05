@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+    <!--    File-->
+    <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="file">
+        <file>data/logs/${APPLICATION_NAME}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>data/logs/${APPLICATION_NAME}-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="fileAudit">
+        <file>data/logs/${APPLICATION_NAME}-audit.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>data/logs/${APPLICATION_NAME}-audit-%d{yyyy-MM-dd}.%i.log.zip
+            </fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>30MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] %message%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--    Async -->
+    <appender class="ch.qos.logback.classic.AsyncAppender" name="asyncFile">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator>
+                <expression>return marker == null || !"AUDIT".equals(marker.getName());</expression>
+            </evaluator>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+        <appender-ref ref="file"/>
+    </appender>
+
+    <appender class="ch.qos.logback.classic.AsyncAppender" name="asyncFileAudit">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator>
+                <expression>return marker != null &amp;&amp; "AUDIT".equals(marker.getName());
+                </expression>
+            </evaluator>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+        <appender-ref ref="fileAudit"/>
+    </appender>
+
+    <logger level="INFO" name="org.cynic.spring_stuff">
+        <appender-ref ref="asyncFileAudit"/>
+    </logger>
+
+    <root level="ERROR">
+        <appender-ref ref="asyncFile"/>
+
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</included>

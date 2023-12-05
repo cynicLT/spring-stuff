@@ -1,0 +1,12 @@
+# <JIRA-NUMBER>: <JIRA-TITLE>
+# |<----  Using a Maximum Of 50 Characters  ---->|
+#
+# Example: JIRA-911: Fix change in configuration of portal
+#
+# Remember to
+#   - Capitalize the subject line
+#   - Squash commits
+#   - Do not end the subject line with a period
+#   - Separate subject from body with a blank line
+#   - Use the body to explain what and why vs. how
+#   - Can use multiple lines with "-" for bullet points in body

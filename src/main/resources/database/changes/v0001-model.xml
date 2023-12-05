@@ -1,0 +1,314 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <!--    Sequences -->
+    <changeSet author="system" id="1">
+        <createSequence cycle="false" incrementBy="1" sequenceName="DOCUMENT_SEQ" startValue="1"/>
+        <createSequence cycle="false" incrementBy="1" sequenceName="ITEM_SEQ" startValue="1"/>
+        <createSequence cycle="false" incrementBy="1" sequenceName="MANAGER_SEQ" startValue="1"/>
+        <createSequence cycle="false" incrementBy="1" sequenceName="ORDER_SEQ" startValue="1"/>
+        <createSequence cycle="false" incrementBy="1" sequenceName="ORGANIZATION_SEQ" startValue="1"/>
+        <createSequence cycle="false" incrementBy="1" sequenceName="PRICE_SEQ" startValue="1"/>
+        <createSequence cycle="false" incrementBy="1" sequenceName="RATE_SEQ" startValue="1"/>
+        <createSequence cycle="false" incrementBy="1" sequenceName="ITEM_ORDER_PRICE_SEQ" startValue="1"/>
+        <createSequence cycle="false" incrementBy="1" sequenceName="NOTIFICATION_SEQ" startValue="1"/>
+    </changeSet>
+
+    <!--    Tables -->
+    <changeSet author="system" id="2">
+        <createTable tableName="ORDER">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE_TIME" type="DATETIME2">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR2(2000)"/>
+            <column name="MANAGER_ID" type="BIGINT"/>
+            <column name="OWNER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CLOSED" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="ITEM">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DESCRIPTION" type="VARCHAR2(2000)"/>
+        </createTable>
+        <createTable tableName="DOCUMENT">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONTENT" type="BINARY LARGE OBJECT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FILE_NAME" type="VARCHAR2(512)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="ITEM_DOCUMENT">
+            <column name="DOCUMENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ITEM_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="MANAGER">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COMMENT" type="VARCHAR2(2000)"/>
+            <column name="EMAIL" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PHONE" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ORGANIZATION_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="ORDER_DOCUMENT">
+            <column name="ORDER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DOCUMENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="ORDER_ITEM">
+            <column name="ORDER_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ITEM_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="ORGANIZATION">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COMMENT" type="VARCHAR2(2000)"/>
+            <column name="EMAIL" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ADDRESS" type="VARCHAR2(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PHONE" type="VARCHAR2(500)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="PRICE">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COVERED" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TYPE" type="VARCHAR(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CURRENCY" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUE" type="NUMERIC(20,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE_TIME" type="DATETIME2">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DUE_DATE_TIME" type="DATETIME2">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="PRICE_DOCUMENT">
+            <column name="DOCUMENT_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PRICE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="ITEM_ORDER_PRICE">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ITEM_ID" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="ORDER_ID" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="PRICE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="FRACTION" type="NUMERIC(20,10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COMMENT" type="VARCHAR2(2000)"/>
+        </createTable>
+        <createTable tableName="RATE">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE_TIME" type="DATETIME2">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VALUE" type="NUMERIC(20,10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CURRENCY" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SOURCE" type="VARCHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="NOTIFICATION">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DATE_TIME" type="DATETIME2">
+                <constraints nullable="false"/>
+            </column>
+            <column name="VISIT" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MESSAGE" type="VARCHAR2(2000)"/>
+            <column name="ITEM_ORDER_PRICE_ID" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="MANAGER_ID" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Constraints -->
+    <changeSet id="3" author="system">
+        <!-- PK -->
+        <addPrimaryKey tableName="NOTIFICATION" columnNames="ID" constraintName="PK_NOTIFICATION_ID"/>
+        <addPrimaryKey tableName="RATE" columnNames="ID" constraintName="PK_RATE_ID"/>
+        <addPrimaryKey tableName="PRICE" columnNames="ID" constraintName="PK_PRICE_ID"/>
+        <addPrimaryKey tableName="ORGANIZATION" columnNames="ID" constraintName="PK_ORGANIZATION_ID"/>
+        <addPrimaryKey tableName="MANAGER" columnNames="ID" constraintName="PK_MANAGER_ID"/>
+        <addPrimaryKey tableName="DOCUMENT" columnNames="ID" constraintName="PK_DOCUMENT_ID"/>
+        <addPrimaryKey tableName="ITEM" columnNames="ID" constraintName="PK_ITEM_ID"/>
+        <addPrimaryKey tableName="ORDER" columnNames="ID" constraintName="PK_ORDER_ID"/>
+        <addPrimaryKey tableName="ITEM_ORDER_PRICE" columnNames="ID" constraintName="PK_ITEM_ORDER_PRICE_ID"/>
+        <addPrimaryKey tableName="PRICE_DOCUMENT" columnNames="DOCUMENT_ID, PRICE_ID"
+                       constraintName="PK_PRICE_DOCUMENT_IDS"/>
+        <addPrimaryKey tableName="ORDER_ITEM" columnNames="ORDER_ID, ITEM_ID" constraintName="PK_ORDER_ITEM_IDS"/>
+        <addPrimaryKey tableName="ORDER_DOCUMENT" columnNames="ORDER_ID, DOCUMENT_ID"
+                       constraintName="PK_ORDER_DOCUMENT_IDS"/>
+        <addPrimaryKey tableName="ITEM_DOCUMENT" columnNames="DOCUMENT_ID, ITEM_ID"
+                       constraintName="PK_ITEM_DOCUMENT_IDS"/>
+
+
+        <!-- FK-->
+        <addForeignKeyConstraint baseTableName="NOTIFICATION" baseColumnNames="ITEM_ORDER_PRICE_ID"
+                                 constraintName="FK_NOTIFICATION_ITEM_ORDER_PRICE_ID"
+                                 referencedTableName="ITEM_ORDER_PRICE" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="NOTIFICATION" baseColumnNames="MANAGER_ID"
+                                 constraintName="FK_NOTIFICATION_MANAGER_ID" referencedTableName="MANAGER"
+                                 referencedColumnNames="ID" onDelete="NO ACTION" onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ITEM_ORDER_PRICE" baseColumnNames="ORDER_ID"
+                                 constraintName="FK_ITEM_ORDER_PRICE_ORDER_ID"
+                                 referencedTableName="ORDER" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ITEM_ORDER_PRICE" baseColumnNames="ITEM_ID"
+                                 constraintName="FK_ITEM_ORDER_PRICE_ITEM_ID"
+                                 referencedTableName="ITEM" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ITEM_ORDER_PRICE" baseColumnNames="PRICE_ID"
+                                 constraintName="FK_ITEM_ORDER_PRICE_PRICE_ID"
+                                 referencedTableName="PRICE" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="PRICE_DOCUMENT" baseColumnNames="PRICE_ID"
+                                 constraintName="FK_PRICE_DOCUMENT_PRICE_ID"
+                                 referencedTableName="PRICE" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="PRICE_DOCUMENT" baseColumnNames="DOCUMENT_ID"
+                                 constraintName="FK_PRICE_DOCUMENT_DOCUMENT_ID"
+                                 referencedTableName="DOCUMENT" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ORDER_ITEM" baseColumnNames="ORDER_ID"
+                                 constraintName="FK_ORDER_ITEM_ORDER_ID" referencedTableName="ORDER"
+                                 referencedColumnNames="ID" onDelete="NO ACTION" onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ORDER_ITEM" baseColumnNames="ITEM_ID"
+                                 constraintName="FK_ORDER_ITEM_ITEM_ID" referencedTableName="ITEM"
+                                 referencedColumnNames="ID" onDelete="NO ACTION" onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ORDER_DOCUMENT" baseColumnNames="ORDER_ID"
+                                 constraintName="FK_ORDER_DOCUMENT_ORDER_ID"
+                                 referencedTableName="ORDER" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ORDER_DOCUMENT" baseColumnNames="DOCUMENT_ID"
+                                 constraintName="FK_ORDER_DOCUMENT_DOCUMENT_ID"
+                                 referencedTableName="DOCUMENT" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="MANAGER" baseColumnNames="ORGANIZATION_ID"
+                                 constraintName="FK_MANAGER_ORGANIZATION_ID"
+                                 referencedTableName="ORGANIZATION" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ITEM_DOCUMENT" baseColumnNames="DOCUMENT_ID"
+                                 constraintName="FK_ITEM_DOCUMENT_DOCUMENT_ID"
+                                 referencedTableName="DOCUMENT" referencedColumnNames="ID" onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ITEM_DOCUMENT" baseColumnNames="ITEM_ID"
+                                 constraintName="FK_ITEM_DOCUMENT_ITEM_ID" referencedTableName="ITEM"
+                                 referencedColumnNames="ID" onDelete="NO ACTION" onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ORDER" baseColumnNames="MANAGER_ID" constraintName="FK_ORDER_MANAGER_ID"
+                                 referencedTableName="MANAGER"
+                                 referencedColumnNames="ID" onDelete="NO ACTION" onUpdate="NO ACTION"/>
+        <addForeignKeyConstraint baseTableName="ORDER" baseColumnNames="OWNER_ID" constraintName="FK_ORDER_OWNER_ID"
+                                 referencedTableName="MANAGER"
+                                 referencedColumnNames="ID" onDelete="NO ACTION" onUpdate="NO ACTION"/>
+
+
+        <!-- UNIQUE -->
+        <addUniqueConstraint tableName="RATE" columnNames="CURRENCY, DATE_TIME"
+                             constraintName="U_RATE_CURRENCY_DATE_TIME"/>
+        <addUniqueConstraint tableName="ITEM_ORDER_PRICE" columnNames="ORDER_ID, PRICE_ID"
+                             constraintName="U_ITEM_ORDER_PRICE_ORDER_ID_PRICE_ID"/>
+        <addUniqueConstraint tableName="ITEM_ORDER_PRICE" columnNames="ITEM_ID, PRICE_ID"
+                             constraintName="U_ITEM_ORDER_PRICE_ITEM_ID_PRICE_ID"/>
+
+        <sql>
+            ALTER TABLE ITEM_ORDER_PRICE
+                ADD CONSTRAINT U_ITEM_ORDER_PRICE_PRICE
+                    CHECK (
+                            (ITEM_ID IS NULL AND ORDER_ID IS NOT NULL) OR
+                            (ITEM_ID IS NOT NULL AND ORDER_ID IS NULL)
+                        )
+        </sql>
+        <sql dbms="postgresql">
+            CREATE
+            EXTENSION btree_gist
+        </sql>
+        <sql dbms="postgresql">
+            ALTER TABLE ITEM_ORDER_PRICE
+                ADD CONSTRAINT U_PRICE_ORDER_OR_ITEM EXCLUDE USING gist(PRICE_ID with =, ORDER_ID with &lt;&gt;, ITEM_ID with &lt;&gt;)
+        </sql>
+    </changeSet>
+</databaseChangeLog>

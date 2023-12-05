@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:db;MODE=PostgreSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  security:
+    token:
+      validate: false
+
+job:
+  cbr:
+    cron: 0 0/1 * * * ?
+  ecb:
+    cron: 0 0/1 * * * ?
+  notifications:
+    cron: 0 0/1 * * * ?

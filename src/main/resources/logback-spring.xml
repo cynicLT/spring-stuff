@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--    <property name="LOG_EXCEPTION_CONVERSION_WORD" value="%wEx{full, org.springframework}"/>-->
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <!--    FIXME: release of 1.4.9-->
+    <!--    <springProperty name="ACTIVE_PROFILE" source="spring.profiles.active"/>-->
+    <!--    <springProperty name="APPLICATION_NAME" source="spring.application.name"/>-->
+
+    <!--    <include resource="logging/logback-${APPLICATION_NAME}.xml"/>-->
+    <include resource="logging/logback-local.xml"/>
+
+</configuration>

@@ -1,0 +1,5 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  org.cynic.spring_stuff.framework.environment.SingleActiveProfileEnvironmentPostProcessor,\
+  org.cynic.spring_stuff.framework.environment.SystemPropertiesEnvironmentPostProcessor
+org.springframework.context.ApplicationListener=\
+  org.cynic.spring_stuff.framework.listener.PropertiesApplicationListener

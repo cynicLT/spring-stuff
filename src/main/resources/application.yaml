@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: spring-stuff
+  jackson:
+    default-property-inclusion: non_empty
+    serialization:
+      CLOSE_CLOSEABLE: true
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    time-zone: UTC
+  liquibase:
+    change-log: classpath:/database/changelog.yaml
+  main:
+    log-startup-info: true
+    web-application-type: servlet
+    banner-mode: off
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          max-age: 30D
+      add-mappings: true
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    open-in-view: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+      ddl-auto: validate
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://accounts.google.com
+          jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+          jws-algorithms: RS256
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+  shutdown: graceful
+  forward-headers-strategy: framework
